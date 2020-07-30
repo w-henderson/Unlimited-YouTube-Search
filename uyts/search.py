@@ -19,22 +19,31 @@ class Search:
             if "itemSectionRenderer" not in sectionList.keys():
                 continue
             for content in sectionList["itemSectionRenderer"]["contents"]:
-                if "videoRenderer" in content.keys():
-                    results.append(Video(
-                        content["videoRenderer"]["videoId"],
-                        content["videoRenderer"]["title"]["runs"][0]["text"],
-                        content["videoRenderer"]["thumbnail"]["thumbnails"][-1]["url"],
-                        content["videoRenderer"]["viewCountText"]["simpleText"],
-                        content["videoRenderer"]["ownerText"]["runs"][0]["text"]
-                    ))
-                elif "playlistRenderer" in content.keys():
-                    results.append(Playlist(
-                        content["playlistRenderer"]["playlistId"],
-                        content["playlistRenderer"]["title"]["simpleText"],
-                        content["playlistRenderer"]["thumbnailRenderer"]["playlistVideoThumbnailRenderer"]["thumbnail"]["thumbnails"][-1]["url"],
-                        content["playlistRenderer"]["videoCount"],
-                        content["playlistRenderer"]["shortBylineText"]["runs"][0]["text"]
-                    ))
+                try:
+                    if "videoRenderer" in content.keys():
+                        results.append(Video(
+                            content["videoRenderer"]["videoId"],
+                            content["videoRenderer"]["title"]["runs"][0]["text"],
+                            content["videoRenderer"]["thumbnail"]["thumbnails"][-1]["url"],
+                            content["videoRenderer"]["viewCountText"]["simpleText"],
+                            content["videoRenderer"]["ownerText"]["runs"][0]["text"]
+                        ))
+                    elif "playlistRenderer" in content.keys():
+                        results.append(Playlist(
+                            content["playlistRenderer"]["playlistId"],
+                            content["playlistRenderer"]["title"]["simpleText"],
+                            content["playlistRenderer"]["thumbnailRenderer"]["playlistVideoThumbnailRenderer"]["thumbnail"]["thumbnails"][-1]["url"],
+                            content["playlistRenderer"]["videoCount"],
+                            content["playlistRenderer"]["shortBylineText"]["runs"][0]["text"]
+                        ))
+                    elif "channelRenderer" in content.keys():
+                        results.append(Channel(
+                            content["channelRenderer"]["channelId"],
+                            content["channelRenderer"]["title"]["simpleText"],
+                            content["channelRenderer"]["subscriberCountText"]["simpleText"]
+                        ))
+                except: # If at first you don't succeed, give up
+                    continue
 
         self.results = results
         self.query = query
@@ -59,3 +68,10 @@ class Playlist:
         self.author = author
     def __str__(self):
         return self.title+" (id="+self.id+")"
+
+class Channel:
+    def __init__(self,id,title,subscriber_count):
+        self.id = id
+        self.title = title
+        self.subscriber_count = subscriber_count
+        self.subs = subscriber_count
