@@ -27,8 +27,17 @@ class Search:
                         content["videoRenderer"]["viewCountText"]["simpleText"],
                         content["videoRenderer"]["ownerText"]["runs"][0]["text"]
                     ))
-                    
+                elif "playlistRenderer" in content.keys():
+                    results.append(Playlist(
+                        content["playlistRenderer"]["playlistId"],
+                        content["playlistRenderer"]["title"]["simpleText"],
+                        content["playlistRenderer"]["thumbnailRenderer"]["playlistVideoThumbnailRenderer"]["thumbnail"]["thumbnails"][-1]["url"],
+                        content["playlistRenderer"]["videoCount"],
+                        content["playlistRenderer"]["shortBylineText"]["runs"][0]["text"]
+                    ))
+
         self.results = results
+        self.query = query
 
 
 class Video:
@@ -37,6 +46,16 @@ class Video:
         self.title = title
         self.thumbnail_src = thumbnail_src
         self.views = views
+        self.author = author
+    def __str__(self):
+        return self.title+" (id="+self.id+")"
+
+class Playlist:
+    def __init__(self,id,title,thumbnail_src,length,author):
+        self.id = id
+        self.title = title
+        self.thumbnail_src = thumbnail_src
+        self.length = length
         self.author = author
     def __str__(self):
         return self.title+" (id="+self.id+")"
