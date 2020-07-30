@@ -1,1 +1,1 @@
-from .search import Search, Video, Playlist
+from .search import Search, Video, Playlist, Channel
