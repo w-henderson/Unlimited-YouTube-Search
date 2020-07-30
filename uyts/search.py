@@ -11,7 +11,6 @@ class Search:
         data = data[:data.index('window["ytInitialPlayerResponse"]')-6]
         true = True; false = False
         data = eval(data)
-        print("results: "+str(data["estimatedResults"]))
         sectionLists = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"]["sectionListRenderer"]["contents"]
 
         results = []
@@ -47,6 +46,7 @@ class Search:
 
         self.results = results
         self.query = query
+        self.resultCount = data["estimatedResults"]
 
 
 class Video:
@@ -56,6 +56,7 @@ class Video:
         self.thumbnail_src = thumbnail_src
         self.views = views
         self.author = author
+        self.resultType = "video"
     def __str__(self):
         return self.title+" (id="+self.id+")"
 
@@ -66,6 +67,7 @@ class Playlist:
         self.thumbnail_src = thumbnail_src
         self.length = length
         self.author = author
+        self.resultType = "playlist"
     def __str__(self):
         return self.title+" (id="+self.id+")"
 
@@ -75,3 +77,4 @@ class Channel:
         self.title = title
         self.subscriber_count = subscriber_count
         self.subs = subscriber_count
+        self.resultType = "channel"
