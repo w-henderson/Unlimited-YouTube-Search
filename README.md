@@ -39,6 +39,7 @@ Attributes:
 - `thumbnail_src`: the URL of the thumbnail
 - `views`: the number of views
 - `author`: the name of the uploader
+- `duration`: the duration of the video
 - `resultType`: the type of result (in this case, `video`)
 
 ### Playlist class

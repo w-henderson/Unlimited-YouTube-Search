@@ -25,7 +25,8 @@ class Search:
                             content["videoRenderer"]["title"]["runs"][0]["text"],
                             content["videoRenderer"]["thumbnail"]["thumbnails"][-1]["url"],
                             content["videoRenderer"]["viewCountText"]["simpleText"],
-                            content["videoRenderer"]["ownerText"]["runs"][0]["text"]
+                            content["videoRenderer"]["ownerText"]["runs"][0]["text"],
+                            content["videoRenderer"]["lengthText"]["simpleText"]
                         ))
                     elif "playlistRenderer" in content.keys():
                         results.append(Playlist(
@@ -50,12 +51,13 @@ class Search:
 
 
 class Video:
-    def __init__(self,id,title,thumbnail_src,views,author):
+    def __init__(self,id,title,thumbnail_src,views,author,duration):
         self.id = id
         self.title = title
         self.thumbnail_src = thumbnail_src
         self.views = views
         self.author = author
+        self.duration = duration
         self.resultType = "video"
     def __str__(self):
         return self.title+" (id="+self.id+")"
