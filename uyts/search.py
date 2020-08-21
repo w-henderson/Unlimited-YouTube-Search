@@ -50,7 +50,15 @@ class Search:
                 break
             page += 1
 
-        self.results = results
+        # remove duplicate results
+        foundURLs = []
+        noDuplicateResults = []
+        for result in results:
+            if result.id not in foundURLs:
+                foundURLs.append(result.id)
+                noDuplicateResults.append(result)
+
+        self.results = noDuplicateResults
         self.query = query
         self.resultsCount = len(results)
         self.maxResultsCount = int(data["estimatedResults"])
