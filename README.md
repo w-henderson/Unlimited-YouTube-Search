@@ -1,7 +1,7 @@
 ![UYTS Banner](images/banner.png)
 
 # Unlimited YouTube Search
-Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from your Python program without the need for the YouTube Data API. It's a partial Python port of [youtube-scrape](https://github.com/HermanFassett/youtube-scrape) by [Herman Fassett](https://github.com/HermanFassett), but it is yet to have all of youtube-scrape's features.
+Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from your Python program without the need for the YouTube Data API. It's a Python port of [youtube-scrape](https://github.com/HermanFassett/youtube-scrape) by [Herman Fassett](https://github.com/HermanFassett) and has the majority of its features.
 
 ## How do I install it?
 Simply clone the repo to your PC, navigate to its folder, and run `python setup.py install`. This will install UYTS and its dependencies.
@@ -24,11 +24,17 @@ for result in search.results:
 # Documentation
 
 ### Search class
-Usage: `uyts.Search(<query>)`
+Usage: `uyts.Search(query,minResults=0)`
+
+Parameters:
+- `query`: the string to search for
+- `minResults` (optional): the minimum number of results to return. UYTS will continue making requests until it reaches this number or runs out of results. The default value of 0 will make one search request.
+
 Attributes:
 - `results`: list of search results
 - `query`: the original search query
-- `resultCount`: an estimation of the total search results (note that this is not the number of results in `results`)
+- `resultsCount`: the number of search results returned
+- `maxResultsCount`: YouTube's estimation of total possible search results
 
 The following three classes are returned in the search results, and while they can be created yourself, there's pretty much no reason you would want to do that so I haven't included how to do so here. It's self explanatory in the code however.
 
