@@ -67,6 +67,16 @@ class Video:
         self.resultType = "video"
     def __str__(self):
         return self.title+" (id="+self.id+")"
+    def ToJSON(self):
+        return {
+            "id":self.id,
+            "title":self.title,
+            "thumbnail_src":self.thumbnail_src,
+            "views":self.views,
+            "author":self.author,
+            "duration":self.duration,
+            "resultType":self.resultType
+        }
 
 class Playlist:
     def __init__(self,id,title,thumbnail_src,length,author):
@@ -78,6 +88,15 @@ class Playlist:
         self.resultType = "playlist"
     def __str__(self):
         return self.title+" (id="+self.id+")"
+    def ToJSON(self):
+        return {
+            "id":self.id,
+            "title":self.title,
+            "thumbnail_src":self.thumbnail_src,
+            "length":self.length,
+            "author":self.author,
+            "resultType":self.resultType
+        }
 
 class Channel:
     def __init__(self,id,title,subscriber_count):
@@ -86,3 +105,10 @@ class Channel:
         self.subscriber_count = subscriber_count
         self.subs = subscriber_count
         self.resultType = "channel"
+    def ToJSON(self):
+        return {
+            "id":self.id,
+            "title":self.title,
+            "subscriber_count":self.subscriber_count,
+            "resultType":self.resultType
+        }

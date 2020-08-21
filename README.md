@@ -47,6 +47,7 @@ Attributes:
 - `author`: the name of the uploader
 - `duration`: the duration of the video
 - `resultType`: the type of result (in this case, `video`)
+- `ToJSON()`: returns the video as a JSON object
 
 ### Playlist class
 Attributes:
@@ -56,6 +57,7 @@ Attributes:
 - `length`: the number of videos in the playlist
 - `author`: the name of the creator
 - `resultType`: the type of result (in this case, `playlist`)
+- `ToJSON()`: returns the playlist as a JSON object
 
 ### Channel class
 Attributes:
@@ -63,3 +65,4 @@ Attributes:
 - `title`: the name of the channel
 - `subs` or `subscriber_count`: the number of subscribers the channel has
 - `resultType`: the type of result (in this case, `channel`)
+- `ToJSON()`: returns the channel as a JSON object
