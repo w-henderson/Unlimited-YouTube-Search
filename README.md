@@ -79,11 +79,16 @@ Attributes:
 ### Server class
 The server must be initialised before you can call `run()`.
 
+Parameters:
+- `serverName` (optional): the name for the Flask server, defaults to `uyts-api`
+- `serverMessage` (optional): the message that appears on the server homepage, defaults to `Server online`
+- `rawHTML` (optional): if `True`, treats `serverMessage` as raw HTML rather than a string, defaults to `False`
+
 Methods:
 - `run(host="0.0.0.0",port=80)`: runs a Flask server on your local IP on port 80, unless specified otherwise
 
 Attributes:
-- `app`: this is a Flask object for the server. For most use-cases you won't need to directly interact with it.
+- `app`: this is a Flask object for the server. For most use-cases you won't need to directly interact with it. However, if you wanted to deploy this to Heroku you would need to do something like `server = uyts.Server().app` and then use Gunicorn to run it with `web: gunicorn main:server` for the Procfile as you can't run something from inside a class (e.g. `web: gunicorn main:server.app` would be invalid).
 
 Server routes:
 - `/`: main page, should show "Server online" if the server is online
@@ -104,6 +109,6 @@ Server routes:
         "title": "PewDiePie",
         "subscriber_count": "106M subscribers",
         "resultType": "channel"
-    }, ...
+    }
 ]
 ```
