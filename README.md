@@ -84,3 +84,26 @@ Methods:
 
 Attributes:
 - `app`: this is a Flask object for the server. For most use-cases you won't need to directly interact with it.
+
+Server routes:
+- `/`: main page, should show "Server online" if the server is online
+- `/api`: API page, either GET `/api/<query>` or `/api/<query>/<minResults>` depending on whether you want to specify the minimum results. The response should look like this (but with more results):
+```json
+[
+    {
+        "id": "dQw4w9WgXcQ",
+        "title": "Rick Astley - Never Gonna Give You Up (Video)",
+        "thumbnail_src": "http://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+        "views": "746,623,786 views",
+        "author": "Official Rick Astley",
+        "duration": "3:32",
+        "resultType": "video"
+    },
+    {
+        "id": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
+        "title": "PewDiePie",
+        "subscriber_count": "106M subscribers",
+        "resultType": "channel"
+    }, ...
+]
+```
