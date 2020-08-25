@@ -21,6 +21,15 @@ for result in search.results:
     print(result.resultType +": "+result.title)
 ```
 
+## What if I want to host a server with it?
+That's already built in! To host a server, simply run the following code:
+```py
+from uyts import Server
+app = Server()
+app.run()
+```
+This will host a Flask server on port 80. More information on how to customise this is in the documentation below.
+
 # Documentation
 
 ### Search class
@@ -66,3 +75,12 @@ Attributes:
 - `subs` or `subscriber_count`: the number of subscribers the channel has
 - `resultType`: the type of result (in this case, `channel`)
 - `ToJSON()`: returns the channel as a JSON object
+
+### Server class
+The server must be initialised before you can call `run()`.
+
+Methods:
+- `run(host="0.0.0.0",port=80)`: runs a Flask server on your local IP on port 80, unless specified otherwise
+
+Attributes:
+- `app`: this is a Flask object for the server. For most use-cases you won't need to directly interact with it.
