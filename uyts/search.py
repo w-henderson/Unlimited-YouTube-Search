@@ -85,6 +85,13 @@ class Video:
             "duration":self.duration,
             "resultType":self.resultType
         }
+    def ToXML(self):
+        tempJson = self.ToJSON()
+        xml = '<video>'
+        for key in tempJson:
+            xml += "<"+key+">"+tempJson[key]+"</"+key+">"
+        xml += "</video>"
+        return xml
 
 class Playlist:
     def __init__(self,id,title,thumbnail_src,length,author):
@@ -105,6 +112,13 @@ class Playlist:
             "author":self.author,
             "resultType":self.resultType
         }
+    def ToXML(self):
+        tempJson = self.ToJSON()
+        xml = '<playlist>'
+        for key in tempJson:
+            xml += "<"+key+">"+tempJson[key]+"</"+key+">"
+        xml += "</playlist>"
+        return xml
 
 class Channel:
     def __init__(self,id,title,subscriber_count):
@@ -120,3 +134,10 @@ class Channel:
             "subscriber_count":self.subscriber_count,
             "resultType":self.resultType
         }
+    def ToXML(self):
+        tempJson = self.ToJSON()
+        xml = '<channel>'
+        for key in tempJson:
+            xml += "<"+key+">"+tempJson[key]+"</"+key+">"
+        xml += "</channel>"
+        return xml
