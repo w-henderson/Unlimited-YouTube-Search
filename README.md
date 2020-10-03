@@ -57,6 +57,7 @@ Attributes:
 - `duration`: the duration of the video
 - `resultType`: the type of result (in this case, `video`)
 - `ToJSON()`: returns the video as a JSON object
+- `ToXML()`: returns the video as an XML string
 
 ### Playlist class
 Attributes:
@@ -67,6 +68,7 @@ Attributes:
 - `author`: the name of the creator
 - `resultType`: the type of result (in this case, `playlist`)
 - `ToJSON()`: returns the playlist as a JSON object
+- `ToXML()`: returns the playlist as an XML string
 
 ### Channel class
 Attributes:
@@ -75,6 +77,7 @@ Attributes:
 - `subs` or `subscriber_count`: the number of subscribers the channel has
 - `resultType`: the type of result (in this case, `channel`)
 - `ToJSON()`: returns the channel as a JSON object
+- `ToXML()`: returns the channel as an XML string
 
 ### Server class
 The server must be initialised before you can call `run()`.
