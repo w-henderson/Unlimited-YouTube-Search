@@ -10,8 +10,16 @@ class Search:
             url = requests.get("https://www.youtube.com/results?q="+parse.quote(query,safe="")+"&page="+str(page))
             if url.status_code != 200:
                 raise Exception("Request failed.")
-            data = url.text[url.text.index("ytInitialData")+17::]
-            data = data[:data.index('window["ytInitialPlayerResponse"]')-6]
+            
+            try: # Old YouTube parsing
+                data = url.text[url.text.index("ytInitialData")+17::]
+                data = data[:data.index('window["ytInitialPlayerResponse"]')-6]
+                self.parseMethod = "initialData"
+            except ValueError: # Scraper-compatible YouTube parsing
+                data = url.text[url.text.index("// scraper_data_begin")+42::]
+                data = data[:data.index('// scraper_data_end')-3]
+                self.parseMethod = "scraper_data"
+
             true = True; false = False
             data = eval(data)
             sectionLists = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"]["sectionListRenderer"]["contents"]
@@ -59,6 +67,7 @@ class Search:
                 noDuplicateResults.append(result)
 
         self.results = noDuplicateResults
+        self.resultsJSON = [result.ToJSON() for result in self.results]
         self.query = query
         self.resultsCount = len(results)
         self.maxResultsCount = int(data["estimatedResults"])

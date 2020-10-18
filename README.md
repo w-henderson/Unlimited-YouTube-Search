@@ -42,6 +42,7 @@ Parameters:
 
 Attributes:
 - `results`: list of search results
+- `resultsJSON`: JSON object of search results
 - `query`: the original search query
 - `resultsCount`: the number of search results returned
 - `maxResultsCount`: YouTube's estimation of total possible search results
