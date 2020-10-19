@@ -1,5 +1,5 @@
 ![UYTS Banner](images/banner.png)
-![License](https://img.shields.io/github/license/w-henderson/unlimited-youtube-search) ![PyPI - Downloads](https://img.shields.io/pypi/dm/unlimited-youtube-search?color=green) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/unlimited-youtube-search) ![GitHub Repo stars](https://img.shields.io/github/stars/w-henderson/unlimited-youtube-search)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/w-henderson/Unlimited-YouTube-Search/UYTS-Tests) ![License](https://img.shields.io/github/license/w-henderson/unlimited-youtube-search) ![PyPI - Downloads](https://img.shields.io/pypi/dm/unlimited-youtube-search?color=green) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/unlimited-youtube-search) ![GitHub Repo stars](https://img.shields.io/github/stars/w-henderson/unlimited-youtube-search)
 
 # Unlimited YouTube Search
 Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from your Python program without the need for the YouTube Data API. It's a Python port of [youtube-scrape](https://github.com/HermanFassett/youtube-scrape) by [Herman Fassett](https://github.com/HermanFassett) and has the majority of its features.
