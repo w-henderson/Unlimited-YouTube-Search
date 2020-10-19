@@ -8,7 +8,7 @@ Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from y
 Simply run `pip install unlimited-youtube-search` in the command prompt to install it from the Python Package Index. Alternatively, clone the repo to your PC, navigate to its folder, and run `python setup.py install`. Both of these methods will install UYTS and its dependencies.
 
 ## How do I use it?
-You'll need to import `uyts` at the start of your project in order to use Unlimited YouTube Search. From then on, you can search YouTube using `search = uyts.Search('search query')`. This returns a search object which has the attribute `results` storing a list of Video, Playlist and Channel objects. For example, if the first result is a video, you could run `print(search.results[0].title)` to see its title. For more information, read on.
+You'll need to import `uyts` at the start of your project in order to use Unlimited YouTube Search. From then on, you can search YouTube using `search = uyts.Search('search query')`. This returns a search object which has the attribute `results` storing a list of Video, Playlist and Channel objects. For example, you could run `print(search.results[0].title)` to see its title. For more information, read on.
 
 ## Simple Example Program
 Here's a simple program to show how easy it is to search YouTube with UYTS.
@@ -19,7 +19,7 @@ query = input("Search query: ")
 search = uyts.Search(query)
 
 for result in search.results:
-    print(result.resultType +": "+result.title)
+    print(result)
 ```
 
 ## What if I want to host a server with it?
