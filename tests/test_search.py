@@ -4,7 +4,7 @@ def test_Search():
     search = Search("pewdiepie")
     
     assert type(search.results) == list
-    assert search.parseMethod in ["initialData", "scraper_data"]
+    assert search.parseMethod in ["initialData", "scraper_data", "initialDataV2"]
     assert search.resultsCount == len(search.results)
     assert search.query == "pewdiepie"
 

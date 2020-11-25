@@ -11,14 +11,30 @@ class Search:
             if url.status_code != 200:
                 raise Exception("Request failed.")
             
-            try: # Old YouTube parsing
-                data = url.text[url.text.index("ytInitialData")+17::]
-                data = data[:data.index('window["ytInitialPlayerResponse"]')-6]
-                self.parseMethod = "initialData"
-            except ValueError: # Scraper-compatible YouTube parsing
-                data = url.text[url.text.index("// scraper_data_begin")+42::]
-                data = data[:data.index('// scraper_data_end')-3]
-                self.parseMethod = "scraper_data"
+            attempt = 0
+            while True:
+                try: 
+                    if attempt == 0: # Old YouTube parsing
+                        data = url.text[url.text.index("ytInitialData")+17::]
+                        data = data[:data.index('window["ytInitialPlayerResponse"]')-6]
+                        self.parseMethod = "initialData"
+                        break
+                    elif attempt == 1: # Scraper-compatible YouTube parsing
+                        data = url.text[url.text.index("// scraper_data_begin")+42::]
+                        data = data[:data.index('// scraper_data_end')-3]
+                        self.parseMethod = "scraper_data"
+                        break
+                    elif attempt == 2:
+                        start = url.text.index("ytInitialData")+16
+                        end = url.text.index("};", start)+1
+                        data = url.text[start:end]
+                        self.parseMethod = "initialDataV2"
+                        break
+                    else:
+                        raise Exception("All parsing attempts failed.")
+                except ValueError: 
+                    attempt += 1
+                    continue
 
             true = True; false = False
             data = eval(data)
