@@ -4,8 +4,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="unlimited-youtube-search", # Replace with your own username
-    version="0.0.3",
+    name="unlimited-youtube-search",
+    version="0.0.4",
     author="William Henderson",
     author_email="william-henderson@outlook.com",
     description="Search YouTube without YouTube Data API",

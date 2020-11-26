@@ -39,6 +39,7 @@ Usage: `uyts.Search(query,minResults=0)`
 Parameters:
 - `query`: the string to search for
 - `minResults` (optional): the minimum number of results to return. UYTS will continue making requests until it reaches this number or runs out of results. The default value of 0 will make one search request.
+- `timeout` (optional): the number of seconds to wait before giving up on the request, defaults to 5
 
 Attributes:
 - `results`: list of search results
@@ -46,6 +47,7 @@ Attributes:
 - `query`: the original search query
 - `resultsCount`: the number of search results returned
 - `maxResultsCount`: YouTube's estimation of total possible search results
+- `suggestedSearches`: list of suggested searches related to your query
 
 The following three classes are returned in the search results, and while they can be created yourself, there's pretty much no reason you would want to do that so I haven't included how to do so here. It's self explanatory in the code however.
 

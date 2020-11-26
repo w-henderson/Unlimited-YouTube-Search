@@ -3,12 +3,16 @@ from urllib import parse
 import json
 
 class Search:
-    def __init__(self,query,minResults=0):
+    def __init__(self, query, minResults=0, timeout=5):
         results = []
         page = 1
         while len(results) <= minResults:
             headers= {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
-            url = requests.get("https://www.youtube.com/results?q="+parse.quote(query,safe="")+"&page="+str(page), headers=headers)
+            url = requests.get(
+                "https://www.youtube.com/results?q="+parse.quote(query,safe="")+"&page="+str(page),
+                headers=headers,
+                timeout=timeout
+            )
             if url.status_code != 200:
                 raise Exception("Request failed.")
             
@@ -59,6 +63,9 @@ class Search:
                 break
             page += 1
 
+            if len(results) == 0:
+                break
+
         # remove duplicate results
         foundURLs = []
         noDuplicateResults = []
@@ -72,6 +79,8 @@ class Search:
         self.query = query
         self.resultsCount = len(results)
         self.maxResultsCount = int(data["estimatedResults"])
+        
+        self.suggestedSearches = [] if "refinements" not in data else data["refinements"]
 
 
 class Video:
