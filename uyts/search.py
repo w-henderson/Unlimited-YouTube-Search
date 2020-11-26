@@ -7,13 +7,14 @@ class Search:
         results = []
         page = 1
         while len(results) <= minResults:
-            url = requests.get("https://www.youtube.com/results?q="+parse.quote(query,safe="")+"&page="+str(page))
+            headers= {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+            url = requests.get("https://www.youtube.com/results?q="+parse.quote(query,safe="")+"&page="+str(page), headers=headers)
             if url.status_code != 200:
                 raise Exception("Request failed.")
             
             try: # Old YouTube parsing
-                data = url.text[url.text.index("ytInitialData")+17::]
-                data = data[:data.index('window["ytInitialPlayerResponse"]')-6]
+                data = url.text[url.text.index("ytInitialData")+16::]
+                data = data[:data.index('</script>')-1]
                 self.parseMethod = "initialData"
             except ValueError: # Scraper-compatible YouTube parsing
                 data = url.text[url.text.index("// scraper_data_begin")+42::]
