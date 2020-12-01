@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="unlimited-youtube-search",
-    version="0.0.4",
+    version="0.1.0",
     author="William Henderson",
     author_email="william-henderson@outlook.com",
     description="Search YouTube without YouTube Data API",
