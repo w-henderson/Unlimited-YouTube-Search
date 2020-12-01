@@ -38,6 +38,8 @@ Usage: `uyts.Search(query,minResults=0)`
 
 Parameters:
 - `query`: the string to search for
+- `language` (optional): the language to return search results in, defaults to "en", accepts ISO codes (e.g. "en", "en-gb", "fr-fr"). For best results, use with the `country` parameter
+- `country` (optional): the region to make the request from, defaults to "GB", accepts ISO codes (e.g. "GB", "US", "FR"). For best results, use with the `language` parameter
 - `minResults` (optional): the minimum number of results to return. UYTS will continue making requests until it reaches this number or runs out of results. The default value of 0 will make one search request.
 - `timeout` (optional): the number of seconds to wait before giving up on the request, defaults to 5
 

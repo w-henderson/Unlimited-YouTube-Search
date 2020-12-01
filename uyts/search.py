@@ -3,13 +3,17 @@ from urllib import parse
 import json
 
 class Search:
-    def __init__(self, query, minResults=0, timeout=5):
+    def __init__(self, query, language="en", country="GB", minResults=0, timeout=5):
         results = []
         page = 1
         while len(results) <= minResults:
-            headers= {"User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
+            headers= {
+                "User-Agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+                "Accept-Language": language
+            }
+
             url = requests.get(
-                "https://www.youtube.com/results?q="+parse.quote(query,safe="")+"&page="+str(page),
+                "https://www.youtube.com/results?q="+parse.quote(query,safe="")+"&page="+str(page)+"&gl="+country,
                 headers=headers,
                 timeout=timeout
             )
