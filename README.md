@@ -62,6 +62,7 @@ Attributes:
 - `author`: the name of the uploader
 - `duration`: the duration of the video
 - `resultType`: the type of result (in this case, `video`)
+- `accountType`: the type of the author's account, either "verified", "music" or "regular"
 - `ToJSON()`: returns the video as a JSON object
 - `ToXML()`: returns the video as an XML string
 
@@ -82,6 +83,7 @@ Attributes:
 - `title`: the name of the channel
 - `subs` or `subscriber_count`: the number of subscribers the channel has
 - `resultType`: the type of result (in this case, `channel`)
+- `accountType`: the type of the author's account, either "verified", "music" or "regular"
 - `ToJSON()`: returns the channel as a JSON object
 - `ToXML()`: returns the channel as an XML string
 
@@ -111,13 +113,15 @@ Server routes:
         "views": "746,623,786 views",
         "author": "Official Rick Astley",
         "duration": "3:32",
-        "resultType": "video"
+        "resultType": "video",
+        "accountType": "music"
     },
     {
         "id": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
         "title": "PewDiePie",
         "subscriber_count": "106M subscribers",
-        "resultType": "channel"
+        "resultType": "channel",
+        "accountType": "verified"
     }
 ]
 ```

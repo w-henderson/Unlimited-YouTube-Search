@@ -7,7 +7,8 @@ def test_Video():
         "https://i.ytimg.com/vi/dQw4w9WgXcQ/hq720.jpg",
         "782,826,227 views",
         "Official Rick Astley",
-        "3:33"
+        "3:33",
+        "BADGE_STYLE_TYPE_VERIFIED_ARTIST"
     )
 
     assert str(testVideo) == "Rick Astley - Never Gonna Give You Up (Video) (id=dQw4w9WgXcQ)"
@@ -18,11 +19,12 @@ def test_Video():
         "views": "782,826,227 views",
         "author": "Official Rick Astley",
         "duration": "3:33",
-        "resultType": "video"
+        "resultType": "video",
+        "accountType": "music"
     }
     assert testVideo.ToXML() == "<video><id>dQw4w9WgXcQ</id><title>Rick Astley - Never Gonna Give You Up (Video)</\
         title><thumbnail_src>https://i.ytimg.com/vi/dQw4w9WgXcQ/hq720.jpg</thumbnail_src><views>782,826,227 views</\
-        views><author>Official Rick Astley</author><duration>3:33</duration><resultType>video</resultType></video>".replace("        ","")
+        views><author>Official Rick Astley</author><duration>3:33</duration><resultType>video</resultType><accountType>music</accountType></video>".replace("        ","")
 
 def test_Playlist():
     testPlaylist = Playlist(
@@ -50,14 +52,16 @@ def test_Channel():
     testChannel = Channel(
         "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
         "PewDiePie",
-        "107M subscribers"
+        "107M subscribers",
+        "BADGE_STYLE_TYPE_VERIFIED"
     )
 
     assert testChannel.ToJSON() == {
         "id": "UC-lHJZR3Gqxm24_Vd_AJ5Yw",
         "title": "PewDiePie",
         "subscriber_count": "107M subscribers",
-        "resultType": "channel"
+        "resultType": "channel",
+        "accountType": "verified"
     }
     assert testChannel.ToXML() == "<channel><id>UC-lHJZR3Gqxm24_Vd_AJ5Yw</id><title>PewDiePie</title>\
-        <subscriber_count>107M subscribers</subscriber_count><resultType>channel</resultType></channel>".replace("        ","")
+        <subscriber_count>107M subscribers</subscriber_count><resultType>channel</resultType><accountType>verified</accountType></channel>".replace("        ","")

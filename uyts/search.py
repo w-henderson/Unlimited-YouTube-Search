@@ -39,13 +39,18 @@ class Search:
                 for content in sectionList["itemSectionRenderer"]["contents"]:
                     try:
                         if "videoRenderer" in content.keys():
+                            try:
+                                accountType = content["videoRenderer"]["ownerBadges"][0]["metadataBadgeRenderer"]["style"]
+                            except:
+                                accountType = "regular"
                             results.append(Video(
                                 content["videoRenderer"]["videoId"],
                                 content["videoRenderer"]["title"]["runs"][0]["text"],
                                 content["videoRenderer"]["thumbnail"]["thumbnails"][-1]["url"],
                                 content["videoRenderer"]["viewCountText"]["simpleText"],
                                 content["videoRenderer"]["ownerText"]["runs"][0]["text"],
-                                content["videoRenderer"]["lengthText"]["simpleText"]
+                                content["videoRenderer"]["lengthText"]["simpleText"],
+                                accountType = accountType
                             ))
                         elif "playlistRenderer" in content.keys():
                             results.append(Playlist(
@@ -56,10 +61,15 @@ class Search:
                                 content["playlistRenderer"]["shortBylineText"]["runs"][0]["text"]
                             ))
                         elif "channelRenderer" in content.keys():
+                            try:
+                                accountType = content["channelRenderer"]["ownerBadges"][0]["metadataBadgeRenderer"]["style"]
+                            except:
+                                accountType = "regular"
                             results.append(Channel(
                                 content["channelRenderer"]["channelId"],
                                 content["channelRenderer"]["title"]["simpleText"],
-                                content["channelRenderer"]["subscriberCountText"]["simpleText"]
+                                content["channelRenderer"]["subscriberCountText"]["simpleText"],
+                                accountType = accountType
                             ))
                     except: # If at first you don't succeed, give up
                         continue
@@ -81,14 +91,14 @@ class Search:
         self.results = noDuplicateResults
         self.resultsJSON = [result.ToJSON() for result in self.results]
         self.query = query
-        self.resultsCount = len(results)
+        self.resultsCount = len(self.results)
         self.maxResultsCount = int(data["estimatedResults"])
         
         self.suggestedSearches = [] if "refinements" not in data else data["refinements"]
 
 
 class Video:
-    def __init__(self,id,title,thumbnail_src,views,author,duration):
+    def __init__(self,id,title,thumbnail_src,views,author,duration,accountType="regular"):
         self.id = id
         self.title = title
         self.thumbnail_src = thumbnail_src
@@ -96,6 +106,15 @@ class Video:
         self.author = author
         self.duration = duration
         self.resultType = "video"
+
+        accountTypes = {
+            "regular": "regular",
+            "BADGE_STYLE_TYPE_VERIFIED_ARTIST": "music",
+            "BADGE_STYLE_TYPE_VERIFIED": "verified"
+        }
+
+        self.accountType = accountTypes[accountType]
+
     def __str__(self):
         return self.title+" (id="+self.id+")"
     def ToJSON(self):
@@ -106,7 +125,8 @@ class Video:
             "views":self.views,
             "author":self.author,
             "duration":self.duration,
-            "resultType":self.resultType
+            "resultType":self.resultType,
+            "accountType":self.accountType
         }
     def ToXML(self):
         tempJson = self.ToJSON()
@@ -144,18 +164,29 @@ class Playlist:
         return xml
 
 class Channel:
-    def __init__(self,id,title,subscriber_count):
+    def __init__(self,id,title,subscriber_count,accountType="regular"):
         self.id = id
         self.title = title
         self.subscriber_count = subscriber_count
         self.subs = subscriber_count
+
+        accountTypes = {
+            "regular": "regular",
+            "BADGE_STYLE_TYPE_VERIFIED_ARTIST": "music",
+            "BADGE_STYLE_TYPE_VERIFIED": "verified"
+        }
+
+        self.accountType = accountTypes[accountType]
         self.resultType = "channel"
+
+
     def ToJSON(self):
         return {
             "id":self.id,
             "title":self.title,
             "subscriber_count":self.subscriber_count,
-            "resultType":self.resultType
+            "resultType":self.resultType,
+            "accountType":self.accountType
         }
     def ToXML(self):
         tempJson = self.ToJSON()
