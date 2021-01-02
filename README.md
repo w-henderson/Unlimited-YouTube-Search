@@ -2,7 +2,7 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/w-henderson/Unlimited-YouTube-Search/UYTS-Tests) ![License](https://img.shields.io/github/license/w-henderson/unlimited-youtube-search) ![PyPI - Downloads](https://img.shields.io/pypi/dm/unlimited-youtube-search?color=green) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/unlimited-youtube-search) ![GitHub Repo stars](https://img.shields.io/github/stars/w-henderson/unlimited-youtube-search)
 
 # Unlimited YouTube Search
-Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from your Python program without the need for the YouTube Data API. It's a Python port of [youtube-scrape](https://github.com/HermanFassett/youtube-scrape) by [Herman Fassett](https://github.com/HermanFassett) and has the majority of its features.
+Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from your Python program without the need for the YouTube Data API. It's a Python port of [youtube-scrape](https://github.com/HermanFassett/youtube-scrape) by [Herman Fassett](https://github.com/HermanFassett) and has the majority of its features. **Unlike [youtube-search-python](https://github.com/alexmercerind/youtube-search-python), this library can be used for commercial and private purposes as well as personal projects.**
 
 ## How do I install it?
 Simply run `pip install unlimited-youtube-search` in the command prompt to install it from the Python Package Index. Alternatively, clone the repo to your PC, navigate to its folder, and run `python setup.py install`. Both of these methods will install UYTS and its dependencies.
