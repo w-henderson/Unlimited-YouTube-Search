@@ -1,9 +1,13 @@
+"""Classes and methods relating to hosting a UYTS API server."""
+
 from .search import Search
 from flask import Flask
 from flask_cors import CORS, cross_origin
 import json
 
 class Server:
+    """Class representing a basic UYTS API server."""
+
     def __init__(self,serverName="uyts-api",serverMessage="Server online",rawHTML=False):
         self.app = Flask(serverName)
         self.cors = CORS(self.app)
@@ -28,4 +32,6 @@ class Server:
             return json.dumps(resultsJSON)
 
     def run(self,host="0.0.0.0",port=80):
+        """Run the Flask server so it can begin to respond to requests."""
+
         self.app.run(host,port)

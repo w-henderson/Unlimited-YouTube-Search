@@ -1,9 +1,17 @@
+"""Classes and methods relating to the searching of YouTube."""
+
 import requests
 from urllib import parse
 import json
 
 class Search:
+    """
+    Base class for search operations, performs a search when initialised.
+    """
+
     def __init__(self, query, language="en", country="GB", minResults=0, timeout=5):
+        """Initialise search class by performing a search."""
+
         results = []
         page = 1
         while len(results) <= minResults:
@@ -17,8 +25,7 @@ class Search:
                 headers=headers,
                 timeout=timeout
             )
-            if url.status_code != 200:
-                raise Exception("Request failed.")
+            if url.status_code != 200: raise Exception("Request failed.")
             
             try: # Old YouTube parsing
                 data = url.text[url.text.index("ytInitialData")+16::]
@@ -29,8 +36,7 @@ class Search:
                 data = data[:data.index('// scraper_data_end')-3]
                 self.parseMethod = "scraper_data"
 
-            true = True; false = False
-            data = eval(data)
+            data = json.loads(data)
             sectionLists = data["contents"]["twoColumnSearchResultsRenderer"]["primaryContents"]["sectionListRenderer"]["contents"]
             
             for sectionList in sectionLists:
@@ -98,6 +104,8 @@ class Search:
 
 
 class Video:
+    """Class representing a YouTube video."""
+
     def __init__(self,id,title,thumbnail_src,views,author,duration,accountType="regular"):
         self.id = id
         self.title = title
@@ -115,9 +123,12 @@ class Video:
 
         self.accountType = accountTypes[accountType]
 
-    def __str__(self):
+    def __repr__(self):
         return self.title+" (id="+self.id+")"
+
     def ToJSON(self):
+        """Return the YouTube video as a JSON object."""
+
         return {
             "id":self.id,
             "title":self.title,
@@ -128,7 +139,10 @@ class Video:
             "resultType":self.resultType,
             "accountType":self.accountType
         }
+
     def ToXML(self):
+        """Return the YouTube video as an XML string."""
+
         tempJson = self.ToJSON()
         xml = '<video>'
         for key in tempJson:
@@ -137,6 +151,8 @@ class Video:
         return xml
 
 class Playlist:
+    """Class representing a YouTube playlist."""
+
     def __init__(self,id,title,thumbnail_src,length,author):
         self.id = id
         self.title = title
@@ -144,9 +160,13 @@ class Playlist:
         self.length = length
         self.author = author
         self.resultType = "playlist"
-    def __str__(self):
+
+    def __repr__(self):
         return self.title+" (id="+self.id+")"
+
     def ToJSON(self):
+        """Return the YouTube playlist as a JSON object."""
+
         return {
             "id":self.id,
             "title":self.title,
@@ -155,7 +175,10 @@ class Playlist:
             "author":self.author,
             "resultType":self.resultType
         }
+
     def ToXML(self):
+        """Return the YouTube playlist as an XML string."""
+
         tempJson = self.ToJSON()
         xml = '<playlist>'
         for key in tempJson:
@@ -164,6 +187,8 @@ class Playlist:
         return xml
 
 class Channel:
+    """Class representing a YouTube channel."""
+
     def __init__(self,id,title,subscriber_count,accountType="regular"):
         self.id = id
         self.title = title
@@ -181,6 +206,8 @@ class Channel:
 
 
     def ToJSON(self):
+        """Return the YouTube channel as a JSON object."""
+
         return {
             "id":self.id,
             "title":self.title,
@@ -188,7 +215,10 @@ class Channel:
             "resultType":self.resultType,
             "accountType":self.accountType
         }
+
     def ToXML(self):
+        """Return the YouTube channel as an XML string."""
+
         tempJson = self.ToJSON()
         xml = '<channel>'
         for key in tempJson:
