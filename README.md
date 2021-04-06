@@ -1,8 +1,10 @@
 ![UYTS Banner](images/banner.png)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/w-henderson/Unlimited-YouTube-Search/UYTS-Tests) ![License](https://img.shields.io/github/license/w-henderson/unlimited-youtube-search) ![PyPI - Downloads](https://img.shields.io/pypi/dm/unlimited-youtube-search?color=green) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/unlimited-youtube-search) ![GitHub Repo stars](https://img.shields.io/github/stars/w-henderson/unlimited-youtube-search)
 
+**IMPORTANT**: I've maintained UYTS for almost nine months now, but YouTube is tightening their scraper-prevention methods and I don't have the time to work around their frequent changes, so I've taken the decision to archive this project. Please take a look at [youtube-search-python](https://github.com/alexmercerind/youtube-search-python) for all your YouTube scraping needs from now on!
+
 # Unlimited YouTube Search
-Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from your Python program without the need for the YouTube Data API. It's a Python port of [youtube-scrape](https://github.com/HermanFassett/youtube-scrape) by [Herman Fassett](https://github.com/HermanFassett) and has the majority of its features. **Unlike [youtube-search-python](https://github.com/alexmercerind/youtube-search-python), this library can be used for commercial and private purposes as well as personal projects.**
+Unlimited YouTube Search (UYTS) is a quick and easy way to search YouTube from your Python program without the need for the YouTube Data API. It's a Python port of [youtube-scrape](https://github.com/HermanFassett/youtube-scrape) by [Herman Fassett](https://github.com/HermanFassett) and has the majority of its features.
 
 ## How do I install it?
 Simply run `pip install unlimited-youtube-search` in the command prompt to install it from the Python Package Index. Alternatively, clone the repo to your PC, navigate to its folder, and run `python setup.py install`. Both of these methods will install UYTS and its dependencies.
